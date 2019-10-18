@@ -4,7 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,6 +25,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bahaa.sociodownloader.Adapter.PagerAdapter;
+import com.bahaa.sociodownloader.Youtube.receiver.ConnectivityReceiver;
+import com.bahaa.sociodownloader.Youtube.view.DownloadActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -64,11 +68,26 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         checkStoragePermission();
+        checkYTLinkMessage(savedInstanceState);
         setupViewPager();
         setupBottomNavigationView();
         setupNavigationDrawer();
 
     }
+
+    private void checkYTLinkMessage(Bundle savedInstanceState) {
+        if (savedInstanceState == null
+                && Intent.ACTION_SEND.equals(getIntent().getAction())
+                && getIntent().getType() != null
+                && getIntent().getType().equals("text/plain")) {
+            String ytLink = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+
+            Intent intent = new Intent(HomeActivity.this, DownloadActivity.class);
+            intent.putExtra("ytLink", ytLink);
+            startActivity(intent);
+        }
+    }
+
 
     private void checkStoragePermission() {
         if (!isStoragePermissionGranted(this)) {
@@ -234,6 +253,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+
+        ConnectivityReceiver connectivityReceiver = new ConnectivityReceiver();
+        registerReceiver(connectivityReceiver, intentFilter);
+
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             uncheckAllDrawerItems();

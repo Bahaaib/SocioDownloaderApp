@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".Youtube.YTDownloader">
+    tools:context=".Youtube.view.DownloadActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
-        android:hint="YouTube link here"
+        android:hint="Paste a valid YouTube link"
         app:errorEnabled="true"
         style="@style/TextInputLayout"
         android:textColorHint="#ffffff">
@@ -65,7 +65,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="270dp"
         android:background="@drawable/rounded_shape_solid"
-        android:text="DOWNLOAD"
+        android:text="LOAD VIDEOS"
         android:textColor="@android:color/white" />
 
 
