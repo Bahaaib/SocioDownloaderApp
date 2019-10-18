@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".Youtube.YTDownloader">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_gradient" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="YouTube DOWNLOADER"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Download High Quality Video and Audio \n Directly from Youtube"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="15sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/link_input_layout"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="190dp"
+        android:hint="YouTube link here"
+        app:errorEnabled="true"
+        style="@style/TextInputLayout"
+        android:textColorHint="#ffffff">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/link_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:layout_gravity="top"
+            android:gravity="left"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#fff"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/download_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="270dp"
+        android:background="@drawable/rounded_shape_solid"
+        android:text="DOWNLOAD"
+        android:textColor="@android:color/white" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="340dp"
+        android:animateLayoutChanges="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
+
+        <LinearLayout
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/network_state"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/colorAccent"/>
+
+</RelativeLayout>
