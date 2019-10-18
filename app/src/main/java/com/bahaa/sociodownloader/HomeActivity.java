@@ -22,6 +22,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bahaa.sociodownloader.Adapter.PagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -63,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         checkStoragePermission();
+        setupViewPager();
         setupBottomNavigationView();
         setupNavigationDrawer();
 
@@ -78,6 +80,30 @@ public class HomeActivity extends AppCompatActivity {
     private boolean isStoragePermissionGranted(Activity activity) {
         int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void setupViewPager() {
+        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
+        viewPager.setAdapter(pagerAdapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void setupBottomNavigationView() {
