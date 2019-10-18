@@ -5,11 +5,100 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
-    <TextView
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:id="@+id/select_arrows"
+        android:layout_below="@+id/select_text"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/arrow_select" />
+
+        <ImageView
+            android:id="@+id/arrow_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:tint="@color/colorPrimary"
+            android:rotation="-25"
+            android:src="@drawable/arrow_select" />
+
+        <ImageView
+            android:id="@+id/arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="80dp"
+            android:rotation="-55"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/arrow_select" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/social_buttons"
+        android:layout_below="@+id/select_arrows"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/fb_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/ic_facebook" />
+
+        <ImageView
+            android:id="@+id/yt_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_youtube" />
+
+        <ImageView
+            android:id="@+id/ig_button"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/ic_instagram" />
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/select_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Select your Social Downloader"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Start Your Download \nwith single touch"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
