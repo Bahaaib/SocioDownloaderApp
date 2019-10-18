@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff1744</color>
+    <color name="colorPrimaryDark">#c4001d</color>
+    <color name="colorPrimaryLight">#ff616f</color>
+    <color name="colorAccent">#003d00</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorGrayLight">#eeeeee</color>
+
+    <color name="colorInactive">#757575</color>
+
+    <color name="colorLikeButton">#FF0000</color>
+
+    <color name="colorGreen">#228B22</color>
+
+    <color name="colorGold">#FFD700 </color>
+
+    <color name="colorYellowLight">#c7b800</color>
+</resources>
