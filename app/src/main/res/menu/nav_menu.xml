@@ -18,7 +18,7 @@
         android:id="@+id/action_downloads"
         android:enabled="true"
         android:icon="@drawable/ic_download"
-        android:title="Download"
+        android:title="Downloads"
         app:showAsAction="ifRoom" />
 
 </menu>
