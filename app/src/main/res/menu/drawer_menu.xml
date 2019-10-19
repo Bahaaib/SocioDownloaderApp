@@ -12,31 +12,10 @@
             android:title="Home"
             app:showAsAction="ifRoom" />
         <item
-            android:id="@+id/action_profile"
+            android:id="@+id/action_about"
             android:enabled="true"
-            android:title="Profile"
-            app:showAsAction="ifRoom" />
-        <item
-            android:id="@+id/action_notification"
-            android:enabled="true"
-            android:title="Notifications"
-            app:showAsAction="ifRoom" />
-        <item
-            android:id="@+id/action_orders"
-            android:enabled="true"
-            android:title="My Tickets"
-            app:showAsAction="ifRoom" />
-
-        <item
-            android:id="@+id/action_points"
-            android:enabled="true"
-            android:title="Points"
-            app:showAsAction="ifRoom" />
-
-        <item
-            android:id="@+id/action_settings"
-            android:enabled="true"
-            android:title="Settings"
+            android:icon="@drawable/ic_info"
+            android:title="About Us"
             app:showAsAction="ifRoom" />
 
     </group>

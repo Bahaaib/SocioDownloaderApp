@@ -26,6 +26,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bahaa.sociodownloader.Adapter.PagerAdapter;
 import com.bahaa.sociodownloader.Facebook.FacebookActivity;
+import com.bahaa.sociodownloader.Instagram.InstagramActivity;
 import com.bahaa.sociodownloader.Youtube.receiver.ConnectivityReceiver;
 import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,11 +85,13 @@ public class HomeActivity extends AppCompatActivity {
             String message = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 
             assert message != null;
-            if (message.contains("youtube") || message.contains("youtu.be")){
+            if (message.contains("youtube") || message.contains("youtu.be")) {
                 navigateToActivityWithExtras(YoutubeActivity.class, message);
-            }else if (message.contains("facebook")){
+            } else if (message.contains("facebook")) {
                 navigateToActivityWithExtras(FacebookActivity.class, message);
-            }else {
+            } else if (message.contains("instagram")) {
+                navigateToActivityWithExtras(InstagramActivity.class, message);
+            } else {
                 displayToast("Not supported link");
             }
         }
@@ -166,24 +169,8 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
-                case R.id.action_profile:
+                case R.id.action_about:
                     //navigateToActivity(ProfileActivity.class);
-                    return true;
-
-                case R.id.action_notification:
-                    //navigateToActivity(NotificationActivity.class);
-                    return true;
-
-                case R.id.action_orders:
-                    //navigateToActivity(OrdersActivity.class);
-                    return true;
-
-                case R.id.action_points:
-                    //navigateToActivity(PointsActivity.class);
-                    return true;
-
-                case R.id.action_settings:
-                    //navigateToActivity(SettingsActivity.class);
                     return true;
 
                 default:

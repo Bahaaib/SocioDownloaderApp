@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".Youtube.view.YoutubeActivity" />
         <activity android:name=".Facebook.FacebookActivity" />
+        <activity android:name=".Instagram.InstagramActivity" />
     </application>
 
 

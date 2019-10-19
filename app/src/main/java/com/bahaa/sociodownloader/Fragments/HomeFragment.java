@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.bahaa.sociodownloader.Facebook.FacebookActivity;
+import com.bahaa.sociodownloader.Instagram.InstagramActivity;
 import com.bahaa.sociodownloader.R;
 import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
 
@@ -38,6 +39,13 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    @OnClick(R.id.fb_button)
+    void openFBDownloader(){
+        Intent intent = new Intent(getActivity(), FacebookActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.yt_button)
     void openTYDownloader(){
         Intent intent = new Intent(getActivity(), YoutubeActivity.class);
@@ -45,9 +53,9 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.fb_button)
-    void openFBDownloader(){
-        Intent intent = new Intent(getActivity(), FacebookActivity.class);
+    @OnClick(R.id.ig_button)
+    void openIGDownloader(){
+        Intent intent = new Intent(getActivity(), InstagramActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
