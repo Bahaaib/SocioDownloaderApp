@@ -521,24 +521,22 @@ public class FacebookActivity extends AppCompatActivity {
 
     public void downloadvideo(String pathvideo) {
         if (pathvideo.contains(".mp4")) {
-            File directory = new File(Environment.getExternalStorageDirectory() + File.separator + "Facebook Videos");
-            directory.mkdirs();
+            File socioDir = new File(Environment.DIRECTORY_DOWNLOADS, "Socio Downloader");
+
+            if (!socioDir.exists()){
+                socioDir.mkdir();
+            }
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(pathvideo));
             request.allowScanningByMediaScanner();
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            File root = new File(Environment.getExternalStorageDirectory() + File.separator + "Facebook Videos");
-            Uri path = Uri.withAppendedPath(Uri.fromFile(root), "Video-" + "facebook" + ".mp4");
-            request.setDestinationUri(path);
+
+            request.setDestinationInExternalPublicDir(socioDir.getAbsolutePath(), "Video-facebook.mp4");
             DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-            //if (downloadList.contains(pathvideo)) {
-            //  Toast.makeText(getApplicationContext().getApplicationContext(), "The Video is Already Downloading", Toast.LENGTH_LONG).show();
-            //} else {
             downloadList.add(pathvideo);
             dm.enqueue(request);
             Toast.makeText(getApplicationContext(), "Downloading Video..", Toast.LENGTH_LONG).show();
 
-            //}
 
         }
     }
