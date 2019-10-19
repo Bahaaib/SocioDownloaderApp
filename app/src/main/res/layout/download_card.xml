@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/video_thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/ic_instagram" />
+
+        <TextView
+            android:id="@+id/video_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="10dp"
+            android:text="video name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="35dp"
+            android:text="Size: "
+            android:textColor="#757575"/>
+
+        <TextView
+            android:id="@+id/video_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="35dp"
+            android:text="Downlaoded: "
+            android:textColor="#757575"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="55dp"
+            android:text="Downlaoded: "
+            android:textColor="#757575"/>
+
+        <TextView
+            android:id="@+id/video_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="185dp"
+            android:layout_marginTop="55dp"
+            android:text="Downlaoded: "
+            android:textColor="#757575"/>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#757575"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
