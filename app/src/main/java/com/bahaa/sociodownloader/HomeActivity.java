@@ -25,8 +25,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bahaa.sociodownloader.Adapter.PagerAdapter;
+import com.bahaa.sociodownloader.Facebook.FacebookActivity;
 import com.bahaa.sociodownloader.Youtube.receiver.ConnectivityReceiver;
-import com.bahaa.sociodownloader.Youtube.view.DownloadActivity;
+import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -68,23 +69,28 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         checkStoragePermission();
-        checkYTLinkMessage(savedInstanceState);
+        checkIntentLinkMessage(savedInstanceState);
         setupViewPager();
         setupBottomNavigationView();
         setupNavigationDrawer();
 
     }
 
-    private void checkYTLinkMessage(Bundle savedInstanceState) {
+    private void checkIntentLinkMessage(Bundle savedInstanceState) {
         if (savedInstanceState == null
                 && Intent.ACTION_SEND.equals(getIntent().getAction())
                 && getIntent().getType() != null
                 && getIntent().getType().equals("text/plain")) {
-            String ytLink = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+            String message = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 
-            Intent intent = new Intent(HomeActivity.this, DownloadActivity.class);
-            intent.putExtra("ytLink", ytLink);
-            startActivity(intent);
+            assert message != null;
+            if (message.contains("youtube") || message.contains("youtu.be")){
+                navigateToActivityWithExtras(YoutubeActivity.class, message);
+            }else if (message.contains("facebook")){
+                navigateToActivityWithExtras(FacebookActivity.class, message);
+            }else {
+                displayToast("Not supported link");
+            }
         }
     }
 
@@ -191,10 +197,11 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
+    private void navigateToActivityWithExtras(Class<? extends AppCompatActivity> TargetActivity
+            , String data) {
         Intent intent = new Intent(HomeActivity.this, TargetActivity);
+        intent.putExtra("data", data);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 

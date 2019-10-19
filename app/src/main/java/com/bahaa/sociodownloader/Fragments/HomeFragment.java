@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.bahaa.sociodownloader.Facebook.FacebookActivity;
 import com.bahaa.sociodownloader.R;
-import com.bahaa.sociodownloader.Youtube.view.DownloadActivity;
+import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,7 +40,14 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.yt_button)
     void openTYDownloader(){
-        Intent intent = new Intent(getActivity(), DownloadActivity.class);
+        Intent intent = new Intent(getActivity(), YoutubeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.fb_button)
+    void openFBDownloader(){
+        Intent intent = new Intent(getActivity(), FacebookActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
