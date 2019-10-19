@@ -86,7 +86,7 @@ public class DownloadsAdapter extends RecyclerView.Adapter {
 
             videoName.setText(adapterModel.get(position).getName());
 
-            videoSize.setText(adapterModel.get(position).getSize());
+            videoSize.setText(adapterModel.get(position).getSize() + " MB");
 
             videoDate.setText(adapterModel.get(position).getDate());
 

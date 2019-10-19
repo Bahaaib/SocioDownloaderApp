@@ -82,6 +82,7 @@ public class DownloadsFragment extends Fragment {
                 video.setSize(getFileSize(file));
                 video.setDate(getFileDate(file));
 
+
                 downloadsList.add(video);
                 adapter.notifyDataSetChanged();
             }
