@@ -2,6 +2,9 @@ package com.bahaa.sociodownloader.Adapter;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.sociodownloader.Models.VideoModel;
 import com.bahaa.sociodownloader.R;
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -24,6 +30,7 @@ public class DownloadsAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ArrayList<VideoModel> adapterModel;
+    private DialogInterface.OnClickListener dialogClickListener;
 
 
     public DownloadsAdapter(Context context, ArrayList<VideoModel> adapterModel) {
@@ -71,6 +78,9 @@ public class DownloadsAdapter extends RecyclerView.Adapter {
         @BindView(R.id.video_date)
         TextView videoDate;
 
+        @BindView(R.id.video_card)
+        CardView videoCard;
+
         DownloadsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -90,6 +100,38 @@ public class DownloadsAdapter extends RecyclerView.Adapter {
 
             videoDate.setText(adapterModel.get(position).getDate());
 
+            videoCard.setOnClickListener(view -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(adapterModel.get(position).getPath()));
+                intent.setDataAndType(Uri.parse(adapterModel.get(position).getPath()), "video/mp4");
+                context.startActivity(intent);
+            });
+
+            videoCard.setOnLongClickListener(view -> {
+                dialogClickListener = (dialog, which) -> {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            //Yes button clicked
+                            File file = new File(adapterModel.get(position).getPath());
+                            file.delete();
+                            adapterModel.remove(position);
+                            notifyItemRemoved(position);
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                };
+                displayDialog();
+                return true;
+            });
+
+        }
+
+        private void displayDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Remove this Video permanently?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         }
 
 
