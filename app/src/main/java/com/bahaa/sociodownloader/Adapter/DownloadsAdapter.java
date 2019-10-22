@@ -115,6 +115,7 @@ public class DownloadsAdapter extends RecyclerView.Adapter {
                             file.delete();
                             adapterModel.remove(position);
                             notifyItemRemoved(position);
+                            notifyItemRangeChanged(0, adapterModel.size());
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:

@@ -5,12 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ProgressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Progress Fragment"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
-
+        android:id="@+id/progress_rv"
+        android:orientation="vertical"/>
 </RelativeLayout>

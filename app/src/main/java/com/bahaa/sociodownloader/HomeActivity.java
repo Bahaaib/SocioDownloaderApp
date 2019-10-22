@@ -4,10 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -27,10 +26,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.bahaa.sociodownloader.Adapter.PagerAdapter;
 import com.bahaa.sociodownloader.Facebook.FacebookActivity;
 import com.bahaa.sociodownloader.Instagram.InstagramActivity;
-import com.bahaa.sociodownloader.Youtube.receiver.ConnectivityReceiver;
+import com.bahaa.sociodownloader.Models.ProgressModel;
 import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,9 +57,13 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.nv)
     public NavigationView navigationView;
 
+    public static ArrayList<ProgressModel> progressList;
+    public static ArrayList<Long> mIds;
+
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Unbinder unbinder;
+    private boolean isTerminated = true;
 
 
     @Override
@@ -68,6 +73,26 @@ public class HomeActivity extends AppCompatActivity {
 
         unbinder = ButterKnife.bind(this);
 
+        if (savedInstanceState == null
+                && Intent.ACTION_SEND.equals(getIntent().getAction())
+                && getIntent().getType() != null
+                && getIntent().getType().equals("text/plain")) {
+            if (progressList == null) {
+                Log.i("statuss", "List RESTARTED");
+                progressList = new ArrayList<>();
+                mIds = new ArrayList<>();
+            } else {
+                isTerminated = false;
+            }
+        } else if (getIntent().getStringExtra("source") != null) {
+            isTerminated = false;
+        }
+
+        if (isTerminated) {
+            Log.i("statuss", "List RESTARTED");
+            progressList = new ArrayList<>();
+            mIds = new ArrayList<>();
+        }
         setSupportActionBar(toolbar);
         checkStoragePermission();
         checkIntentLinkMessage(savedInstanceState);
@@ -82,11 +107,13 @@ public class HomeActivity extends AppCompatActivity {
                 && Intent.ACTION_SEND.equals(getIntent().getAction())
                 && getIntent().getType() != null
                 && getIntent().getType().equals("text/plain")) {
+            isTerminated = false;
             String message = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 
             assert message != null;
             if (message.contains("youtube") || message.contains("youtu.be")) {
                 navigateToActivityWithExtras(YoutubeActivity.class, message);
+                Log.i("Statuss", "Opened YouTube");
             } else if (message.contains("facebook")) {
                 navigateToActivityWithExtras(FacebookActivity.class, message);
             } else if (message.contains("instagram")) {
@@ -200,6 +227,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        isTerminated = false;
+        super.onPause();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -244,12 +276,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-
-        ConnectivityReceiver connectivityReceiver = new ConnectivityReceiver();
-        registerReceiver(connectivityReceiver, intentFilter);
-
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             uncheckAllDrawerItems();

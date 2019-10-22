@@ -38,12 +38,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bahaa.sociodownloader.HomeActivity;
+import com.bahaa.sociodownloader.Models.ProgressModel;
 import com.bahaa.sociodownloader.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.bahaa.sociodownloader.HomeActivity.progressList;
 
 @SuppressWarnings("ALL")
 public class FacebookActivity extends AppCompatActivity {
@@ -312,6 +318,7 @@ public class FacebookActivity extends AppCompatActivity {
                             || webView.getUrl().equals("https://m.facebook.com/home.php")) {
                         Intent intent = new Intent(FacebookActivity.this, HomeActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("source", "fb");
                         startActivity(intent);
                     } else {
                         webView.goBack();
@@ -445,7 +452,6 @@ public class FacebookActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("Statuss", "I'm in onResume!");
         if (sentToSettings) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 //Got Permission
@@ -456,8 +462,6 @@ public class FacebookActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        Log.i("Statuss", "I'm in onPause!");
-
         if (webView.isShown() == false) {
             webView.stopLoading();
         }
@@ -531,11 +535,25 @@ public class FacebookActivity extends AppCompatActivity {
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-            request.setDestinationInExternalPublicDir(socioDir.getAbsolutePath(), "Video-facebook.mp4");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.US);
+            Date now = new Date();
+            String fileName = "fb-"+ formatter.format(now) + ".mp4";
+
+            request.setDestinationInExternalPublicDir(socioDir.getAbsolutePath(), fileName);
             DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
             downloadList.add(pathvideo);
-            dm.enqueue(request);
+            Long downloadId = dm.enqueue(request);
             Toast.makeText(getApplicationContext(), "Downloading Video..", Toast.LENGTH_LONG).show();
+
+            ProgressModel progress = new ProgressModel();
+            progress.setName(fileName);
+            progress.setDownloadId(downloadId);
+            String path = "/storage/emulated/0/" + socioDir.getPath() + "/" + fileName;
+            progress.setPath(path);
+
+            progressList.add(progress);
+
+            Log.i("Statuss", "FB/Progress List size= " + progressList.size());
 
 
         }

@@ -30,6 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.print.PrintHelper;
 
+import com.bahaa.sociodownloader.Models.ProgressModel;
 import com.bahaa.sociodownloader.R;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
@@ -52,6 +53,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.bahaa.sociodownloader.HomeActivity.progressList;
 
 @SuppressWarnings("ALL")
 public class InstagramActivity extends AppCompatActivity {
@@ -261,11 +264,6 @@ public class InstagramActivity extends AppCompatActivity {
     }
 
     public void downloadVideoToSDCard(View view) {
-        final ProgressDialog downloadingBar = new ProgressDialog(InstagramActivity.this);
-        downloadingBar.setTitle("Please wait");
-        downloadingBar.setMessage("Video is being downloaded to Internal Memory ... ");
-        downloadingBar.setCancelable(false);
-        downloadingBar.show();
         SimpleDateFormat sd = new SimpleDateFormat("yymmhh");
         String date = sd.format(new Date());
         final String name = "Ig-video-" + date + ".mp4";
@@ -291,7 +289,6 @@ public class InstagramActivity extends AppCompatActivity {
                     fos.write(buffer);
                     fos.flush();
                     fos.close();
-                    downloadingBar.dismiss();
 
                 } catch (FileNotFoundException e) {
                     Toast.makeText(InstagramActivity.this, "File Not Found. Try again later", Toast.LENGTH_SHORT).show();
@@ -303,7 +300,7 @@ public class InstagramActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Download Completed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(InstagramActivity.this, "Download Completed", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -401,7 +398,7 @@ public class InstagramActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
                 out.flush();
                 out.close();
-                Toast.makeText(getApplicationContext(), "Download Completed", Toast.LENGTH_LONG).show();
+                Toast.makeText(InstagramActivity.this, "Download Completed", Toast.LENGTH_LONG).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -521,7 +518,7 @@ public class InstagramActivity extends AppCompatActivity {
 
         File socioDir = new File(Environment.DIRECTORY_DOWNLOADS, "Socio Downloader");
 
-        if (!socioDir.exists()){
+        if (!socioDir.exists()) {
             socioDir.mkdir();
         }
 
@@ -531,7 +528,21 @@ public class InstagramActivity extends AppCompatActivity {
         request.setDestinationInExternalPublicDir(socioDir.getAbsolutePath(), metadata);
 
         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        manager.enqueue(request);
+        Long downloadId = manager.enqueue(request);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InstagramActivity.this, "Download started", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ProgressModel progress = new ProgressModel();
+        progress.setName(metadata);
+        progress.setDownloadId(downloadId);
+        String path = "/storage/emulated/0/" + socioDir.getPath() + "/" + metadata;
+        progress.setPath(path);
+
+        progressList.add(progress);
     }
 
     private void hideOption(int id) {
