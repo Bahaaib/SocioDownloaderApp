@@ -29,6 +29,8 @@ public class ProgressFragment extends Fragment {
     @BindView(R.id.progress_rv)
     RecyclerView progressRV;
 
+
+
     private Unbinder unbinder;
 
     private static int oldSize;
@@ -50,6 +52,8 @@ public class ProgressFragment extends Fragment {
 
         return v;
     }
+
+
 
     @Override
     public void onResume() {

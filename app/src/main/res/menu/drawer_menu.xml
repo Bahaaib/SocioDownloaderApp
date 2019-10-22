@@ -18,6 +18,13 @@
             android:title="About Us"
             app:showAsAction="ifRoom" />
 
+        <item
+            android:id="@+id/action_how"
+            android:enabled="true"
+            android:icon="@drawable/ic_how"
+            android:title="How to use"
+            app:showAsAction="ifRoom" />
+
     </group>
 
 </menu>

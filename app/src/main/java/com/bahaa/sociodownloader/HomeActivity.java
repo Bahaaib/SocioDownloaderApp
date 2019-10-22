@@ -199,6 +199,9 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.action_about:
                     //navigateToActivity(ProfileActivity.class);
                     return true;
+                case R.id.action_how:
+                    navigateToActivity(HowActivity.class);
+                    return true;
 
                 default:
                     return true;
@@ -215,6 +218,12 @@ public class HomeActivity extends AppCompatActivity {
             , String data) {
         Intent intent = new Intent(HomeActivity.this, TargetActivity);
         intent.putExtra("data", data);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
+        Intent intent = new Intent(HomeActivity.this, TargetActivity);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

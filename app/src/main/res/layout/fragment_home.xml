@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/select_arrows"
+        android:paddingBottom="10dp"
         android:layout_below="@+id/select_text"
         android:layout_marginTop="20dp">
 
@@ -18,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:tint="@color/colorPrimary"
             android:src="@drawable/arrow_select" />
 
         <ImageView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:tint="@color/colorPrimary"
+            android:paddingBottom="15dp"
             android:rotation="-25"
             android:src="@drawable/arrow_select" />
 
@@ -38,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="80dp"
             android:rotation="-55"
-            android:tint="@color/colorPrimary"
             android:src="@drawable/arrow_select" />
 
     </RelativeLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HowActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:text="Your Guide to use \nSocio Downloader"/>
+
+        <TextView
+            android:id="@+id/fb_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/title"
+            android:textColor="#3b5998"
+            android:text="Facebook: "/>
+
+        <TextView
+            android:id="@+id/fb_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/fb_header"
+            android:text="@string/fb_steps"/>
+
+        <TextView
+            android:id="@+id/yt_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/fb_body"
+            android:textColor="@color/colorPrimary"
+            android:text="YouTube: "/>
+
+        <TextView
+            android:id="@+id/yt_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/yt_header"
+            android:text="@string/yt_steps"/>
+
+        <TextView
+            android:id="@+id/ig_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/yt_body"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Instagram: "/>
+
+        <TextView
+            android:id="@+id/ig_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/ig_header"
+            android:text="@string/ig_steps"/>
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/ig_body"
+            android:textColor="@color/colorGreen"
+            android:text="@string/note"/>
+    </RelativeLayout>
+
+
+</ScrollView>
