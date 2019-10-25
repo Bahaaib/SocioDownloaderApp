@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bahaa.sociodownloader.Adapter.DownloadsAdapter;
 import com.bahaa.sociodownloader.Models.VideoModel;
 import com.bahaa.sociodownloader.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,9 @@ public class DownloadsFragment extends Fragment {
     @BindView(R.id.downloads_rv)
     RecyclerView downloadsRV;
 
+    @BindView(R.id.adView)
+    AdView adView;
+
     private Unbinder unbinder;
 
 
@@ -54,6 +59,7 @@ public class DownloadsFragment extends Fragment {
 
         setupDownloadsRV();
         getDownloadsList();
+        loadBannerAd();
 
 
         return v;
@@ -66,6 +72,11 @@ public class DownloadsFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         downloadsRV.setLayoutManager(linearLayoutManager);
 
+    }
+
+    private void loadBannerAd(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     private void getDownloadsList() {

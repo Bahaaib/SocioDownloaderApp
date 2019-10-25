@@ -58,16 +58,19 @@ public class FacebookActivity extends AppCompatActivity {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private TextInputEditText urlBar;
     private AppCompatButton goButton;
+    private AppCompatButton goBackButton;
     private int isInternetConnected = 1;
     private static final int PERMISSION_CALLBACK_CONSTANT = 101;
     private static final int REQUEST_PERMISSION_SETTING = 102;
     private boolean sentToSettings = false;
     public static ArrayList<String> downloadList = new ArrayList<String>();
 
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_facebook);
         savePermissionState();
@@ -82,6 +85,12 @@ public class FacebookActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.facebook_toolbar);
         setSupportActionBar(toolbar);
     }
+    void goBack() {
+        Log.i("Statuss", "Pressed Back");
+        Intent intent = new Intent(FacebookActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
 
     void checkFacebookLinkMessage(Intent intent) {
         if (intent.getStringExtra("data") != null) {
@@ -95,6 +104,7 @@ public class FacebookActivity extends AppCompatActivity {
     private void setupWebView() {
         urlBar = findViewById(R.id.url_bar);
         goButton = findViewById(R.id.go_button);
+        goBackButton = findViewById(R.id.fb_back_button);
         mySwipeRefreshLayout = findViewById(R.id.swipeContainer);
         mprogress = findViewById(R.id.progressBar);
         mprogress.setProgress(0);
@@ -113,6 +123,13 @@ public class FacebookActivity extends AppCompatActivity {
             public boolean onLongClick(View view) {
                 urlBar.getText().clear();
                 return false;
+            }
+        });
+
+        goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goBack();
             }
         });
 
@@ -527,7 +544,7 @@ public class FacebookActivity extends AppCompatActivity {
         if (pathvideo.contains(".mp4")) {
             File socioDir = new File(Environment.DIRECTORY_DOWNLOADS, "Socio Downloader");
 
-            if (!socioDir.exists()){
+            if (!socioDir.exists()) {
                 socioDir.mkdir();
             }
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(pathvideo));
@@ -537,7 +554,7 @@ public class FacebookActivity extends AppCompatActivity {
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.US);
             Date now = new Date();
-            String fileName = "fb-"+ formatter.format(now) + ".mp4";
+            String fileName = "fb-" + formatter.format(now) + ".mp4";
 
             request.setDestinationInExternalPublicDir(socioDir.getAbsolutePath(), fileName);
             DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);

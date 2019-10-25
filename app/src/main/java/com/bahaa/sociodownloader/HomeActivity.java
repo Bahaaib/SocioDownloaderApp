@@ -2,9 +2,11 @@ package com.bahaa.sociodownloader;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -28,6 +30,9 @@ import com.bahaa.sociodownloader.Facebook.FacebookActivity;
 import com.bahaa.sociodownloader.Instagram.InstagramActivity;
 import com.bahaa.sociodownloader.Models.ProgressModel;
 import com.bahaa.sociodownloader.Youtube.view.YoutubeActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -64,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Unbinder unbinder;
     private boolean isTerminated = true;
+    private InterstitialAd interstitialAd;
 
 
     @Override
@@ -72,6 +78,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         unbinder = ButterKnife.bind(this);
+
+        MobileAds.initialize(this, "ca-app-pub-9965625406494479~4304101540");
 
         if (savedInstanceState == null
                 && Intent.ACTION_SEND.equals(getIntent().getAction())
@@ -203,6 +211,10 @@ public class HomeActivity extends AppCompatActivity {
                     navigateToActivity(HowActivity.class);
                     return true;
 
+                case R.id.action_rate:
+                    rateApp();
+                    return true;
+
                 default:
                     return true;
             }
@@ -216,15 +228,41 @@ public class HomeActivity extends AppCompatActivity {
 
     private void navigateToActivityWithExtras(Class<? extends AppCompatActivity> TargetActivity
             , String data) {
+        buildInterstitialAd();
         Intent intent = new Intent(HomeActivity.this, TargetActivity);
         intent.putExtra("data", data);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
+    private void rateApp() {
+        Uri uri = Uri.parse("market://details?id=" + getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+        }
+    }
+
+    private void buildInterstitialAd() {
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-9965625406494479/4850896451");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
+    }
+
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
+        buildInterstitialAd();
         Intent intent = new Intent(HomeActivity.this, TargetActivity);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

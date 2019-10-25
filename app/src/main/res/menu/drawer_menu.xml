@@ -25,6 +25,13 @@
             android:title="How to use"
             app:showAsAction="ifRoom" />
 
+        <item
+            android:id="@+id/action_rate"
+            android:enabled="true"
+            android:icon="@drawable/ic_rate"
+            android:title="Rate us"
+            app:showAsAction="ifRoom" />
+
     </group>
 
 </menu>

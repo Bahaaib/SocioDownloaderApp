@@ -8,12 +8,17 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_socio"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_socio"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9965625406494479~4304101540"/>
         <activity android:name=".HowActivity"></activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity" android:taskAffinity=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -28,16 +33,26 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".Youtube.view.YoutubeActivity" />
-        <activity android:name=".Facebook.FacebookActivity" />
-        <activity android:name=".Instagram.InstagramActivity" />
+        <activity
+            android:name=".Youtube.view.YoutubeActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity=".Youtube.view.YoutubeActivity"/>
+        <activity
+            android:name=".Facebook.FacebookActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity=".Youtube.view.FacebookActivity"/>
+        <activity
+            android:name=".Instagram.InstagramActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity=".Youtube.view.InstagramActivity"/>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

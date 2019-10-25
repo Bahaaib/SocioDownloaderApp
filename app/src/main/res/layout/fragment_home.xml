@@ -95,7 +95,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Start Your Download \nwith single touch"
+        android:text="Start Your Download \nwith a single touch"
         android:textColor="@color/colorBlack"
         android:textSize="20dp"
         android:textStyle="bold" />

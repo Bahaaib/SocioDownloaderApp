@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bahaa.sociodownloader.Adapter.ProgressAdapter;
 import com.bahaa.sociodownloader.R;
 import com.bahaa.sociodownloader.WrapContentLinearLayoutManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +30,8 @@ public class ProgressFragment extends Fragment {
 
     @BindView(R.id.progress_rv)
     RecyclerView progressRV;
+    @BindView(R.id.progress_adView)
+    AdView adView;
 
 
 
@@ -48,7 +52,8 @@ public class ProgressFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, v);
 
-        setupDownloadsRV();
+        setupProgressRV();
+        loadBannerAd();
 
         return v;
     }
@@ -71,12 +76,17 @@ public class ProgressFragment extends Fragment {
         super.onResume();
     }
 
-    private void setupDownloadsRV() {
+    private void setupProgressRV() {
         adapter = new ProgressAdapter(getActivity(), progressList);
         progressRV.setAdapter(adapter);
         wrapContentLinearLayoutManager = new WrapContentLinearLayoutManager(getActivity());
         progressRV.setLayoutManager(wrapContentLinearLayoutManager);
 
+    }
+
+    private void loadBannerAd(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     @Override
