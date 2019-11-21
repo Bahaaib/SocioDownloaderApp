@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bahaa.sociodownloader">
+    package="com.bahaaapps.sociodownloader">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".Youtube.ApplicationInstance"
+        android:name="com.bahaaapps.sociodownloader.Youtube.ApplicationInstance"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_socio"
+        android:icon="@mipmap/socio_512"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
-        android:roundIcon="@mipmap/ic_socio"
+        android:roundIcon="@mipmap/socio_512"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9965625406494479~4304101540"/>
-        <activity android:name=".HowActivity"></activity>
-        <activity android:name=".HomeActivity" android:taskAffinity=".HomeActivity">
+
+        <activity
+            android:name="com.bahaaapps.sociodownloader.HowActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.bahaaapps.sociodownloader.HomeActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -33,26 +45,45 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".Youtube.view.YoutubeActivity"
-            android:excludeFromRecents="true"
-            android:taskAffinity=".Youtube.view.YoutubeActivity"/>
+            android:name="com.bahaaapps.sociodownloader.Youtube.view.YoutubeActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
         <activity
-            android:name=".Facebook.FacebookActivity"
-            android:excludeFromRecents="true"
-            android:taskAffinity=".Youtube.view.FacebookActivity"/>
+            android:name="com.bahaaapps.sociodownloader.Facebook.FacebookActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".Instagram.InstagramActivity"
-            android:excludeFromRecents="true"
-            android:taskAffinity=".Youtube.view.InstagramActivity"/>
+            android:name="com.bahaaapps.sociodownloader.Instagram.InstagramActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9965625406494479~4304101540" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.bahaaapps.sociodownloader"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

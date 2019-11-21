@@ -22,6 +22,16 @@
 
     </style>
 
+    <style name="FBTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="boxStrokeColor">#3b5998</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="errorTextColor">#3b5998</item>
+        <item name="hintTextColor">#3b5998</item>
+
+    </style>
+
     <style name="HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="android:textSize">14sp</item>
     </style>

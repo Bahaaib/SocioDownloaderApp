@@ -18,7 +18,7 @@
             android:id="@+id/arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="110dp"
             android:src="@drawable/arrow_select" />
 
         <ImageView
@@ -28,6 +28,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:paddingBottom="15dp"
+            android:tint="@color/colorWhite"
+            android:visibility="invisible"
             android:rotation="-25"
             android:src="@drawable/arrow_select" />
 
@@ -36,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
+            android:layout_marginRight="110dp"
             android:rotation="-55"
             android:src="@drawable/arrow_select" />
 
@@ -53,7 +55,7 @@
             android:id="@+id/fb_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="90dp"
             android:src="@drawable/ic_facebook" />
 
         <ImageView
@@ -62,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_youtube" />
 
         <ImageView
@@ -69,7 +72,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="90dp"
             android:src="@drawable/ic_instagram" />
 
     </RelativeLayout>
